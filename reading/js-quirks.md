@@ -88,7 +88,7 @@ Most languages have some form of "null" value that indicates the lack of a value
 
 JS, however, kicks it up a notch and has two such values.  Their use is not 100% consistent and they behave somewhat differently from one another, but overall `null` represents an assigned value that is not a value, while `undefined` tends to be a value that was never set to anything or to nothing.
 
-If that feels odd it is because that is odd.  Just think that you should never SET anything to be `undefined`, but you might check to see if a value has `undefined`.
+If that feels odd, that is because that truly is odd.  Just think that you should never SET anything to be `undefined`, but you might check to see if a value has `undefined`.
 
 ### Declarations and Hoisting
 
@@ -121,6 +121,8 @@ JS has Regular Expression as a specific Object type AND has `//` delimeters to d
 # Many TODO sections
 
 ## Typing types overall
+
+
 ### Dynamic Typing
 
 #### Not Much Compile Time Checking
