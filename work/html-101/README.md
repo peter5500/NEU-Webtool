@@ -1,5 +1,7 @@
 # HTML-101
 
+** PR Due by 11:59pm on _Sunday_ Jan 28 **
+
 Be sure to pay attention to the details about names and locations.
 
 1. Create a feature branch named 'html-101' off your local copy of this repo.
