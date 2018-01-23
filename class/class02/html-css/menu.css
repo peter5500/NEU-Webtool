@@ -1,0 +1,42 @@
+body { 
+  background-color: cornsilk;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+}
+
+.menu > li { 
+  vertical-align: top;
+}
+
+.menu-title {
+  width: 85px;
+}
+
+.main-menu {
+  display: inline-block;
+}
+
+.main-menu > li {
+  display: inline-block;
+}
+
+.main-menu > li:hover {
+  background-color: #bada55;
+}
+
+.secondary-menu {
+  display:none;
+  position: absolute;
+  background-color: #336699;
+}
+
+.secondary-menu > li:hover {
+  background-color: #c0ffee;
+}
+
+.main-menu > li:hover .secondary-menu {
+  display:inline-block;
+}
