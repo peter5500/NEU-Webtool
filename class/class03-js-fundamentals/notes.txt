@@ -1,0 +1,257 @@
+Javascript = JS = ECMAScript
+
+ES3 - was old common version
+ES5 - new old common version
+
+Evergreen = auto browser updates
+
+ES2015 = ES6
+ES7 = ES2016
+
+Interpreted, not compiled
+
+C-based syntax
+- semicolon-separated expressions
+- blocks via curly braces
+
+JS will let you skip semicolons most of the time.  For this class, don't skip, because you don't know the exception
+
+Terms:
+
+{} = curly brances
+[] = brackets/square brackets
+() = parens
+
+Above can be "open" or "close" (e.g. open curly = { )
+
+! = bang (= "not" )
+' = single quote
+" = double quote
+` = backtick
+~ = tilde 
+. = dot
+- = hyphen or dash
+
+originally for browser only, now more options
+File I/O not in spec
+Web interfaces in spec
+
+Types = how to interpret the value
+int, float = Number
+
+Primitives and Objects
+Primitives have object form (except null & undefined
+
+Number
+String
+Object
+Array * (also Object)
+Regexp * (also Object)
+Function * (also Object)
+Boolean
+null  ( explicitly not a value) 
+undefined  (not a value, but not explicitly set)
+(Symbol) (deeper magic)
+
+12 > 15  numeric comparison
+"cat" > "bob"  alphabetical comparison
+"1" > "02"  string comparison vs numeric comparison
+
+Variables - labels for data in memory
+
+name: "Brett"
+Age: 10000
+pets: "cats"
+
+Array = ordered.  Index.  0 based.  Element
+Object = key/value key. Properties.  (property is sometimes used to mean the key, sometimes the value)
+
+String - some form of quoting, pretty much the same
+"hello"
+'hello'
+`hello` - recent, also has an extra we'll explore later
+"hello\n There" - backslash to "escape" a character 
+\n = "newline"
+
+Numbers
+
+1
+2
+34
+5.6
+0
+-67
+
+"05" - Not Number
+
+Infinity
+NaN
+
+Objects
+{} = declares an object (blocks also use {}, but they aren't objects)
+
+bob = 4;
+foo = bob + 1;
+bob = 3;
+
+initialize variable (first assignment)
+declaration (once per variable, not more, not less)
+assignment (give value = set variable to refer to specific memory location)
+
+
+var = ES3, don't use it
+
+var foo;
+var foo = 3;
+var foo, bar = 3;
+
+const - not a constant, but variable can't be reassigned
+(objects and arrays can have contents change while variable still refers to same object/array)
+Always use const unless you have to use let
+
+const foo;
+const foo = 3;
+const foo, bar = 3;
+
+let foo;
+let foo = 3;
+let foo=3;
+let foo, bar = 3;
+
+let foo = "hi";
+
+foo = "hi";
+foo = 3;
+
+3 * "hi"  ( NaN )
+3 + "hi"  ("3hi")
+3 + 5  (8)
+
+foo + bar; 
+
+strong/weak-typing = can automatic coercion (convert to another type) happen? Weak = yes
+dynamic/static-typing = is type part of variable or data?  dynamic = yes
+3 > NaN
+"01" 1 
+
+Strong, static - Java, C#, etc
+Strong, dynamic - Python
+weak, static - C
+weak, dynamic - JS, Perl 
+
+Strong + static allows "compile-time" checking (before a type error is encountered)
+
+dynamic typing:
+foo = '';
+foo = {};
+foo = { 
+  bar: 5,
+  frank: 'jane'
+};
+
+other = foo.bar;
+key = 'bar';
+val = foo[key];
+foo.bar = 5;
+foo['bar'] = 5;
+foo['some-stuff'] = 3;
+
+foo = { one: 'a' };
+foo.two = 'b';
+
+const foo = 5;
+foo = 5; // Is not allowed because of const
+/* also a comment 
+still a comment
+*/
+
+const foo = {}; 
+foo.val = 5; // OKAY
+
+foo = []; // Array
+
+foo = [ 'a', 2, 'hi'];
+foo[0]; // 'a'
+
+foo[1] = 5;
+bar = foo[4];
+foo[8] = 'jk';
+foo = {};
+foo[8] = 'hi';
+foo['8'] = 'hi';
+foo = [];
+foo.bar = 'hi';
+
+Functions = runnable object
+
+console.log('hi');
+console.log;
+foo = console.log('hi');
+foo = console.log;
+foo('hi');
+
+function 
+gets "called"
+executes
+runs
+returns a value;
+arguments / parameters / args / params - passing
+
+function foo( arg1, arg2 )  {
+  console.log(arg1 + arg2);
+  return 1;
+}
+foo('hi', 'you');
+foo('hi'); // JS does not enforce number of parameters
+foo();
+frank = foo();
+frank = foo('hi');
+bar = 3;
+foo(bar);
+foo(bar, bar);
+
+
+function foo( arg1 ) { 
+  return arg1 + 1;
+}
+bar = foo(3);
+bar = foo();
+
+
+function amit(arg1, arg2) {
+  arg1.test = 5;
+}
+
+bar = {};
+amit(bar); // variable is "bar" here, but "arg1" inside amit()
+
+function jane(arg1) {
+  arg1 = 5;
+}
+bar = 3;
+jane(bar);
+bar = jane;
+
+jane = function(arg1) {
+};
+
+Objects/Arrays can nest other values:
+
+bar = {
+  foo: [ 'a', 2, 3 ],
+  baz: { joe: 1 },
+  stuff: function() { console.log('hi'); }
+};
+
+bar.stuff();
+
+Boolean
+
+foo = true;
+foo = false;
+
+truthy /falsy 
+comparison ( ==, != ) // Don't use!
+strict comparison ( ===, !== ) // Use!
+always use strict comparison EXCEPT for truthy/falsy checks
+
