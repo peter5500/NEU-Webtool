@@ -1,0 +1,328 @@
+Scopes - what functions/variables are "visible" to the current line of code
+
+
+lexical scoping - if not found, check containing scope
+
+let, const are block-scoped
+everything else is function-scoped (functions are blocks)
+
+let foo = 5;
+doStuff(foo);
+doOtherStuff(foo);
+console.log(bar);  // No 'bar' here - error
+console.log(foo); // still 5
+doGlobalStuff();
+console.log(foo); // now 5
+
+function doStuff( foo ) { // function params are effectively "declared"
+  console.log(foo); // Different 'foo' than outer foo
+  foo = 10; // outer foo is still 5
+}
+
+function doOtherStuff( bar ) { // bar has the same value that the "foo" that was passed had
+  let foo = 0; //Different foo
+  console.log(bar);
+  console.log(foo); // 0, not 5
+  const zoo = function() { console.log(foo); foo += 1; };
+  const zo1 = function() { console.log(foo); foo += 1; };
+  zoo(); // 0
+  zo1(); // 1
+  zo1(); // 2
+  zoo(); // 3
+}
+
+function doGlobalStuff() {
+  foo = 5; // this IS outer 'foo'
+}
+
+if ( true ) { // a block that is not a function
+  var foo = 5; // actually declares a 'foo' outside of the block
+  let bar = 6; // visible only within the block
+}
+
+globals
+
+state  (application state, substates)
+
+Objects
+{} // simple object, but still inherits methods like "toString()"
+
+inheritance - powerful, don't overuse.  Prefer composition.
+
+Classic Inheritance: 
+
+Grand
+ - stuff
+Parent from Grand
+- more stuff
+Child from Parent
+- different stuff
+
+Class is a blueprint, a template
+JS does not REALLY have classes because there is no enforcement and there is no real class "entity" (ES6 classes are only kind of an entity).
+
+instanceof - used minimally in JS because of the many ways it can be "wrong"
+
+typeof - used to determine how to manage incoming data, rarely used for much else except to check for 'undefined' 
+(JS weirdness - null is type "object", while undefined is type "undefined")
+
+duck-typing - by humans, computer has no such explicit concept
+Check for methods rather than instanceof()
+
+Prototypal inheritance
+
+inherit from an actual object, not a plan or template for an object (not a class)
+
+
+How to set the prototype?
+
+4 ways - all create an object and set the prototype.  
+Notable differences: Whether a constructor runs, what is considered the constructor for instanceof() purposes
+
+1) Constructor Function
+
+function Foo() {  // convention to use a leading capital for Constructor functions like this, not magic
+  console.log('hi');
+}
+
+Foo.prototype.example = function() { // The object in Foo.prototype is set as the prototype of the instance, which is NOT the same as saying that the prototype property of the instance has any value.
+  console.log('example');
+};
+const bar = new Foo(); // hi!  
+
+bar.example(); // example
+
+2) Object.create();
+
+const foo = Object.create(bar); // bar is the prototype
+const baz = Object.create(); // default Object is the prototype
+const qux = Object.create(null); // no prototype at all (for when you don't want even the default Object methods))
+
+NOTHING RUNS on creation (no constructor)
+
+foo.one // a function on the object foo
+
+foo.__proto__.one // a function of the _prototype_ of foo, not of foo itself 
+
+__proto__ shouldn't be used, it's old and uncool.  Use Object.getPrototypeOf() instead
+
+getOwnProperty...yadayadayada, old fears aren't really relevant in modern JS
+
+3) Brute Force
+
+const bar = { one: 1, two: 2 };
+const foo = { two: 4, three: 6 };
+Object.setPrototypeOf(foo, bar);
+
+foo.two; // 4
+bar.two; // 2
+foo.one; // 1
+bar.one; // 1
+foo.three; // 6
+bar.three; // undefined
+
+4) ES6 Classes 
+
+"syntactical sugar" (Very similar to Constructor function way of creating inheritance
+
+class Foo {
+  constructor() { 
+    // do stuff
+  }
+  someMethod() {
+  }
+}
+
+const foo = new Foo(); // constructor runs
+foo prototype is an object containing the methods in the class statement plus any changes done by the constructor function
+
+Great concern over this syntax when new, actual impact was minimal
+
+4 Methods to create inheritance
+
+OOP (imperative) vs functional (procedural) vs slapped-it-all-together
+
+'this' = The most confusing thing in JS
+Not the same as most languages (but close) (but important differences)
+Similarities can make you overconfident
+
+more abstract
+
+this.foo = 6;
+
+`this` is an object.  Any object.  OOP-style methods have `this` being the instance of the object, so that:
+
+function Foo() { 
+  report() { 
+    if(this.msg) { 
+      console.log(this.msg);
+    } else {
+      this.complain();
+    }
+  }
+  complain() {
+    console.log("D'oh!");
+  }
+}
+
+const foo = new Foo();
+const bar = new Foo();
+foo.report(); // D'oh! 
+bar.report(); // D'oh!
+foo.msg = 'hi';
+foo.report(); // hi 
+bar.report(); // D'oh! - notice that foo and bar have different values for 'this'
+
+explicit binding vs implicit binding
+
+implicit: What was before the dot in the function call?  That object is what 'this' refers to if no explicit binding has been made
+
+const foo = new Foo();
+const bar = new Foo();
+foo.report(); // D'oh! 
+bar.report(); // D'oh!
+foo.msg = 'hi';
+foo.report(); // hi 
+bar.report(); // D'oh! - notice that foo and bar have different values for 'this'
+bar.complain = function() { console.log('bye'); };
+foo.msg = '';
+bar.msg = '';
+foo.report(); // D'oh!
+bar.report(); // bye - notice that the different this objects have different methods (which are just properties)
+foo.msg = 'hey'
+const baz = foo.report; // not calling, using function object as a value
+const qux = {
+  report: foo.report,
+  msg: 'wow'
+};
+foo.report(); // hey
+baz(); // fails because it tries to call the global complain() or undefined.complain() (depending on strictness setting)
+quz.report(); // wow - notice that the EXACT SAME function as foo.report() gives different answers when called different ways
+
+
+foo.bar = function() { console.log(this.thing); };
+baz = foo.bar;
+foo.bar(); // will use this === foo
+baz(); // use use this === default context
+
+callbacks are #1 issue with losing expected value of `this`
+
+implicit `this` is problem when you have a function that uses `this` that is also used as a callback
+because whatever code calls the callback likely does so as callback() (no dot, nothing before the dot) rather than someOutsideObject.callback()
+which means 'this' will have a different value inside the called function when the function is called as a property of an object vs when the function is called by an external method that takes a callback function as a parameter and calls the passed function when it decides to.
+
+Callbacks are very, VERY common in JS, so this does come up
+
+How to handle/prevent losing 'this'
+
+1) Save this into another variable;
+2) Explicitly bind via .bind();
+3) Explicit binding via fat arrow 
+
+1) Saving 'this' context:
+
+const countdown = { // Need an outer object to make a current 'this' something real
+  announce: function() { 
+    console.log('Start');
+  },
+  baselineTest: function() { 
+    countdown.announce(); // Start - function works
+    [1].forEach( function() { console.log('ping'); } ); // 'ping' - this syntax calls the anon function once. 
+    // this syntax is purely to compress a shortish example
+
+    // here we show that an anon function not-so-anon as callback works the same as an inline anon function
+    // pulling out anon function as callback to improve clarity - no other reason
+    let callback = function() { this.announce(); };
+    [1].forEach( callback ); // fails, same as the anon function itself
+  },
+  failsAsCallback: function() { // Functions that use 'this' AND are used as callbacks is where we loose 'this'
+    [1].forEach( function() { this.announce(); } ); // fails.  Anon functions for callbacks are very common
+  },
+  winsAsCallbackViaSaving: function() { 
+    const self = this;
+    [1].forEach( function() { self.announce(); } ); // Start
+    // The 'this' variable can change what object it refers to, 
+    // but all other variables follow normal scoping rules and don't change themselves, 
+    // so 'self' inside the anonymous callback remains pointing at what 'this' referred to outside of the anonymous callback
+  },
+  winsAsCallbackViaBind: function() {
+    const callback = function() { this.announce(); }; // Here is the 'this' in the callback
+    // [1].forEach( callback ); // would fail, inside the func 'callback', 'this' is wrong
+    [1].forEach( callback.bind(this) ); // Start, the bound function returned by bind() will always have 'this' as the object you bound
+  },
+  winsAsCallbackViaArrow: function() {
+    const callback = () => { this.announce(); }; // Here is the 'this' in the callback, but with an arrow function
+    [1].forEach( callback ); // Start - the function was created with an explicit bind to the value of 'this' when the function is executed
+  }
+};
+
+2) Explicit Bind via .bind();
+
+functions are objects
+functions can have properties and methods on them like other objects
+objects inherit default properties/methods
+functions inherit the bind() method (among others)
+bind() is passed an object and returns a function
+The returned function is just like the function that bind() is being called on
+except in the returned function any references to 'this' will always use the object that this function was bound to, regardless of how this returned function is called (regardless of what is before the dot in the call)
+
+See winsAsCallbackViaBind()
+
+3) Fat arrow:
+
+See winsAsCallbackViaArrow()
+
+foo.bar = () => { console.log(this.thing); }; 
+foo.bar = function() { console.log(this.thing); }; // same as above
+foo.bar = foo.bar.bind(this)
+
+() => {};
+(foo, bar) => {};
+foo => {};
+(foo, bar) => someVal; // someVal can't be {}, implicit return value
+(foo, bar) => { return someVal; }; // requires 
+
+
+// WHAT?! foo => bar => joe.doStuff();
+
+DOM is API to read/modify the state of the rendered webpage (What is API?)
+DOM is an object representation of the rendererd webpage
+Early DOM is primary reason JS has such a bad reputation (no longer true, we now have different reasons to be hated)
+Different "node" than NodeJS
+
+JS is single-threaded in executing explicit code.  Other threads exist to perform background functions (downloads, rendering, etc) or when explicitly created (Web Workers).
+
+How to handle when a user clicks after code has finished running?
+
+Events
+
+Events are 'fired' ('triggered'), enter queue 
+Listeners (Handlers) will react.  When? 
+when no other code running, listeners will check queue
+Event Loop is to check the event queue
+How does a listener get created?
+Register the function, function is callback
+
+'click' event example demo
+
+Don't use HTML attribute versions (e.g. onClick=""), don't use single handler node methods (e.g. click())
+use (node) .addEventListener( callback );
+
+Event Propagation / Event Bubbling
+
+Interacting with DOM Nodes:
+
+Finding
+
+.getElement[s]ByXXX
+.querySelector/.querySelectorAll
+
+Reading
+
+.value or .innerText, .innerHTML
+
+Writing - as reading for values, create elements and set innerHTML
+
+IIFE - to prevent your code from polluting (or being polluted by) the global namespace
+(() => { })()
+Create anonymous function and immediately execute it

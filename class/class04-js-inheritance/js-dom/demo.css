@@ -1,0 +1,15 @@
+.hovered { 
+  background-color: #C0FFEE;
+}
+
+.complete { 
+  text-decoration: line-through;
+}
+
+.delete {
+  display: none;
+}
+
+.hovered .delete {
+  display: inline;
+}
