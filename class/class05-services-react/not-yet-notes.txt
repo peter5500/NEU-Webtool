@@ -1,0 +1,163 @@
+Long form notes adjusted for what we covered in class are forthcoming, but here are the highlights to get started:
+
+Common mistakes to improve on:
+- Keep your git commits clean (always check with `git status` before committing, don't mess up directory structure)
+- Almost never need/want to use String(), Array(), Object(), etc - use "", [], {} instead
+- Never use `var` in class (only for old browsers), always use `const` if you can, `let` when you must
+- Use IIFE to avoid globals
+- values that are global-like to your code should be used judiciously - hard to test, hard to follow
+- Decouple your code as much as possible.  Use the Principle of Least Knowledge
+- Use small functions that have 1 job.  Shoot for 10 lines or less, more than 15 is probably an issue
+
+Material Reviewed/Extended:
+- Closures: returna function that interacts with a variable in-scope for it, but not in-scope for whatever calls it.
+- `this`: Implicit binding is whatever is before the dot.  Whatever is before the dot.  Whatever is before the dot.
+- you tend to lose what is before the dot if you pass a function that uses `this` as a callback
+- Explicit binding via .bind() or fat arrow functions
+- Polyfills bring in future functionality by adding to the prototypes of fundamental objects (Object, Array, String, etc)
+
+Unit testing:
+- Unit tests test each "unit" (usually a function) in isolation - gives you confidence in your code
+- Testing Pyramid (unit/integration/UI) Each level has fewer tests that the previous, each tests only what the previous level had to assume.
+- Test Driven Development (TDD).  Unit tests BEFORE code, red-green-refactor cycle.  
+- TDD: Write a failing test (red).  Write code until the test passes (green).  Modify code as needed (refactor).  Write another test...
+- Teacher TODO: Unit testing example
+
+Async (asynchronous):
+- Your JS code is synchronous.  Other code only triggered by event loop when any other code is done.  Any triggered code is itself synchronous once running.
+- When you want to react to async events (user actions, service calls, etc): Callbacks or Promises
+- Callbacks can create Pyramid of Doom when one callback uses another callback that uses another callback, etc
+- Promises help flatten the chain of events
+- Promises are objects that track their own completion status (pending/resolved/rejected) and result value
+- Promises are actually simple-but-clever wrappers around callbacks
+- Promises are "thenables" because they have a then() method. (and a catch() method, which secretly calls then())
+- then() and catch() return NEW promises
+- then() and catch() are passed callbacks
+- the callbacks to then() and catch() are called with whatever value the Promise resolved with or rejected with
+- if a then()/catch() callback returns a value, that is the resolve value
+- if a then()/catch() callback throws an error, that is the rejected value
+- if a then()/catch() callback returns a Promise, that is the same as resolving/rejecting with however the Promise completes
+- this means if a catch() that caught an error doesn't throw an error/reject itself, the promise it returned will be in resolved, not rejected state
+- then() and catch() themselves run immediately (synchronously) and return a promise
+- the callbacks passed to then() and catch() are NOT run immediately, even if they have no need to wait
+- this means try/catch doesn't work on Async code (it checks then() and catch(), but not their callbacks)
+- Always use a catch()  (unless you are returning a promise and the caller should handle errors)
+- Promise.resolve() and Promise.reject() create promises that will complete as listed, with any value passed to the resolve()/reject()
+- This means you can usually flatten nested then()s
+- You rarely call `new Promise()`, instead other functions will return promises
+- fetch() is a big example
+- fetch() returns a promise that will resolve() with an HTTP response object
+- fetch() will only throw an error(reject) if there are network problems
+- fetch() will resolve even if the page returned an error, because the fetch was successful
+- use the response.ok value to see if the page returned an error
+
+Web Service Calls from browser JS:
+- Service calls( was AJAX) = using XHR/fetch to send/get data from a webserver
+- The difference between a web service and any other url is how it is used
+- service calls are usually to give data for program consumption
+- non-service calls usually give some asset: html, JS, CSS, images, etc
+- SOP: Same Origin Policy.   You can only load assets from other domains if they are JS, CSS, or images
+- CORS: Extended options beyond SOP.  If and only if the server on the other domain says your domain is allowed to make a request, the browser will allow it, otherwise it fails
+- port is considered part of the domain for SOP/CORS
+- so is scheme (http vs https)
+- SOP and CORS are browser-only issues, because browsers run code from random strangers
+- JSON: a data interchange format.  Text that uses a restricted JS syntax.  
+- Object keys must be double-quoted.  No comments.  No functions.
+- JSON is Easily converted to actual JS with JSON.parse()
+- JSON is easily produced from JS with JSON.stringify()
+- JSONP was a hacky workaround for SOP/CORS.  Not common anymore because CORS server configurations are better known.
+- HTTP requests have a 'method' (a 'verb')
+- GET, POST, PUT, PATCH, DELETE are the common ones (OPTIONS, HEAD, and TRACE are others)
+- Mostly the verbs are not enforced
+- Exception: GET requests are 'idempotent' - they can be called repeatedly safely
+- Exception: GET requests have no body content - any data is passed as query-string parameters
+
+A Webserver in NodeJS:
+- yarn is just a competitor to npm
+- yarn and npm do much the same thing, but they create different lockfiles, so stick to one in a project
+- `npm init` to create a package.json
+- `npm install --save foo` or `npm install --save-dev foo` to install package foo and list it as a dependency
+- `npm install` will install all dependencies listed in a package.json
+- express is a node module used to create webservers
+- express is not the only such module, but it is widely used
+- express can be configured to map a directory of static assets (html/JS/CSS/images) to paths on urls
+- express can also be configured to generate dynamic responses to specific paths
+- Note: JS returned to run in a browser is not the same as JS run to generate any dynamic content
+- Having JS run in both places can be done (isomorphic aka universal), but isn't done very often
+- ports below 1024 are restricted to admin users, so non-standard ports are often used for development
+- 80/443 are the real ports.  3000,5000,8000,8080,8888, etc are all commonly used test ports 
+- Teacher TODO: Example webserver code
+
+Web Service organizational concepts:
+- SOAP was XML-based, single endpoint (mostly), passed a command within the XML, was common, now rare
+- SOAP made little if any use of HTTP verbs (was usually POST or GET)
+- REST is currently common
+- REST has specific rules that are much debated.  The core takeaways are:
+- REST: URLs (endpoints) represent a "resource" that can be interacted with
+- REST: The HTTP verb should indicate how you are interacting with the resource
+- REST: GET = read, POST = create, PUT = replace, PATCH = partial update, DELETE = delete
+- Purists will say that most services that claim to be RESTful actually aren't
+- Purists are vastly outnumbered by pragmatists in this case
+- Common REST exception: Querys with lots of data in the query often use POST instead of GET
+- GraphQL is gaining popularity, but still fairly uncommon
+- GraphQL allows you to specific what data you want
+- GraphQL is always POST
+- GraphQL is usually a single endpoint
+- These are all conventions, a webservice can use one, use one poorly, or just do it's own thing
+- Sample REST endpoints: See https://jsonplaceholder.typicode.com/
+- Teacher TODO: Show how to put services on heroku
+
+All the many things involved in getting a modern page out
+- Teacher TODO: css preprocessors, minifiers, bundlers, transpilers, linters
+- Note: Node uses require() to pull in other files, which returns whatever module.exports (or just exports) is set to in said file
+- Note: Bundled (via a bundler) ES6 uses `import` to pull in values from other files.
+- Note: import does not return a value
+- Note: import can import a default that was exported, and/or non-default values that were exported (using {} )
+
+React:
+- React is the presentation part of your code
+- ...so logic is best done in different JS files that are imported and functions called
+- JSX is HTML-like text that is transpiled into actual JS that creates HTML
+- React is made up of "Components" that are passed properties like HTML attributes
+- Class-based Components have inherited "lifecycle" methods that you can override
+- Example: componentWillMount() runs when a component is added to the page
+- Class-based Components have "state".  You can set this.state in the constructor and use this.setState() in other methods to change state.
+- Component state persists
+- Component state is per Component
+- Functional components (function-based components) are just functions.  They are basically a render() method
+- Functional components have no persistence, no state, no lifecycle methods. They can only operate on the properties they are passed.
+- Components can import and use other Components
+- Components can be used multiple places and passed different values
+- It is a good practice to keep your Components smaller and simpler
+- Components are essentially functions/objects, so the same good practices apply
+- For this class use ".jsx" for Components.  Not required outside of the class.
+- Components are in files named after the component.  Leading capital letter.  
+- one component per file, the component and any imports should be the only thing in the file 
+- I recommend using a lot of functional components (only use class-based when you need state and/or lifecycle)
+- functional components encourage good habits
+- render() in class-based components has access to `this.props` which are the properties(attributes) passed to the component instance
+- render() in class-based components has access to `this.state`, which is the current state object for the component instance
+- functional components have no `this`, no state
+- functional components are passed an object of properties from the component instance
+- functional components can use ES6 Object destructuring to make the properties clear
+- Example: <User age="32" name="Jane"/> 
+- Example: User = ({ age, name }) => {...};
+- React Docs: https://reactjs.org/
+
+Create React App: 
+- A tool to help get rolling with a React-based Single Page Application quickly
+- install as a utility: `npm install -g create-react-app`
+- use to create projects: `create-react-app PROJECT_NAME`
+- README has a ton of information
+- `npm start` runs the development web server
+- `npm run build` creates static files in build/ that can be used
+- Static files will point to the wrong place unless you set the "homepage" property in the package.json
+- `npm run eject` will remove the create-react-app parts and leave the various parts and configurations
+- Don't 'eject' like this on normal projects/assignments
+- Teacher TODO: Show how to connect up a React app with services
+
+Github Pages:
+- Your repos contain a `/docs` directory
+- any HTML files you put in there will be reachable at https://seainfo6250.github.io/YOUR_REPO_NAME
+- those files are NOT private.  The web pages there will be visible to anyone that hits the URL
+- You can put in JS, CSS, or other static assets there too
