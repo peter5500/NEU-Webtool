@@ -183,8 +183,8 @@ function reset() {
   history.count = 0;
   history.playerResult = [];
   history.computerResult = [];
-  wordInfo.word1 = "";//Initialize the guess word of play1
-  wordInfo.word2 = "";//Initialize the guess word of play2
+  wordInfo.word1 = "";
+  wordInfo.word2 = "";
   document.getElementById("player").innerHTML = "No guesses made";
   document.getElementById("computer").innerHTML = "No guesses made";
   resetButton();
@@ -217,7 +217,6 @@ function computerTurn() {
 }
 
 function showGuessHistory() {
-  console.log("wtf!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
   document.getElementById('player').innerHTML = '';
   let word = "letters";
   for (let pre in history.playerResult) {
@@ -273,11 +272,10 @@ function showGuessHistory() {
     history.count += 1;
     let inputValue = document.getElementsByTagName("input")[0].value.toUpperCase();
     document.getElementsByTagName("input")[0].value = "";
-    //Human win the game
     if (wordInfo.word1 === inputValue) {
-      event.target.hidden = true;//Hide the 'Guess' Button
+      event.target.hidden = true;
       statusMessage.innerHTML = `Human wins in ${history.count} turns`;
-      document.getElementsByTagName("button")[2].hidden = false;//Unhiden the "Reset" Button
+      document.getElementsByTagName("button")[2].hidden = false;
     }
   
     computerTurn();
