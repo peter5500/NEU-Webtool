@@ -146,7 +146,7 @@ function compare(guess, word){
       tries[guess.charCodeAt(i) - 'A'.charCodeAt()] += 1;
     }
     for( let k = 0; k < 5; k++ ){
-      target[base.charCodeAt(k) - 'A'.charCodeAt()] += 1;
+      target[word.charCodeAt(k) - 'A'.charCodeAt()] += 1;
     }
     for( let j = 0; j < 26; j++ ){
       if( tries[j] > 0 && target[j] > 0 ){
@@ -210,13 +210,14 @@ function computerTurn() {
   computerResult.similarity = compare(computerResult.guess, wordInfo.word2);
   document.getElementsByClassName("pre-guess")[0].innerHTML = history.computerResult[history.computerResult.length - 1].guess;
   if (computerResult.guess === wordInfo.word2) {
-    event.target.hidden = true;//Hide the 'Guess' Button
+    event.target.hidden = true;
     statusMessage.innerHTML = `Computer wins in ${history.count} turns`;
-    document.getElementsByTagName("button")[2].hidden = false;//Unhiden the "Reset" Button
+    document.getElementsByTagName("button")[2].hidden = false;
   }
 }
 
 function showGuessHistory() {
+  console.log("wtf!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
   document.getElementById('player').innerHTML = '';
   let word = "letters";
   for (let pre in history.playerResult) {
@@ -237,7 +238,7 @@ function showGuessHistory() {
       word = "letter";
     }
 
-    let preWord = history.computerResult[pre].guess + ": " + history.computerResult[pre].similarity + " " + word + " in common";
+    let preWord = history.computerResult[pre].guess + ": " + history.computerResult[pre].similarity + " " + word + " in common.";
   
     document.getElementById('computer').innerHTML += "<li>" + preWord + "</li>";
     word = "letters";
@@ -268,7 +269,7 @@ function showGuessHistory() {
     }
   }); 
 
-  function checkInputWord(event) {
+  function checkInput(event) {
     history.count += 1;
     let inputValue = document.getElementsByTagName("input")[0].value.toUpperCase();
     document.getElementsByTagName("input")[0].value = "";
@@ -289,13 +290,12 @@ function showGuessHistory() {
   
   function guess(event) {
     event.target.disabled = true;
-    checkInputWord(event);
+    checkInput(event);
   }
   
-  //Check the validation of input string
+
   function check(event) {
     let button;
-    //Find the current button
     if (document.getElementsByTagName("button")[0].hidden == false) {
       button = document.getElementsByTagName("button")[0];
     } else if (document.getElementsByTagName("button")[1].hidden == false) {
@@ -327,9 +327,6 @@ function showGuessHistory() {
     }
   }
   
-  
-  
-  //add listener for three button and input area
   function addEventListener() {
     document.getElementsByTagName('button')[0].addEventListener("click", begin);
     document.getElementsByTagName('button')[1].addEventListener("click", guess);
