@@ -1,0 +1,37 @@
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <title>Guess Competition</title>
+    <link rel="stylesheet" href="design.css">
+  </head>
+  <body>
+    <nav><h1>Word Guessing Game</h1>
+    </nav>
+    <p class="title">Hello, let's see who guess the word first!</p>
+    <div class="container">
+      <div class="guess-part"></div> 
+        <input id= "player-text" class="player-text" type="text" placeholder="Enter a secret word...&#x23ce;"> 
+        <div class="pre-guess"></div>
+        <p class="button-content">
+            <button id="button" class="button" type="submit">Begin</button>
+            <button id="button" class="button" type="submit">Guess</button>
+            <button id="button" class="button" type="submit">Reset</button>
+        </p>
+        <div class="com-guess">
+            <p>Guessing status:</p><p class="status-message"></p>
+            <!-- <output id="status_output"></output>  -->
+            <!-- <div class="guess-turn">
+                <p>Guessing turn: <span id = "count-turn"></span></p>
+            </div> -->
+            <p>Computer guess history:</p>
+            <ul id="computer"></ul>
+        </div>
+        <div class="player-guess">
+            <p>Your guess history:</p>
+            <ul id="player"></ul>
+        </div>
+      </div>
+    </div>
+    <script src="guess.js"></script>
+  </body>
+  </html>
