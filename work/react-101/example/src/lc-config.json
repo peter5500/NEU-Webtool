@@ -1,0 +1,11 @@
+{ 
+  "modeLabels": { 
+    "letters": "Letters",
+    "vowels": "Vowels"
+  },
+  "resultLabels": {
+    "letters": "letters",
+    "vowels": "vowels"
+  }
+}
+    
