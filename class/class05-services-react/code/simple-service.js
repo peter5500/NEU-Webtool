@@ -1,10 +1,12 @@
 // run me with `node simple-service.js`
 
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 const PORT = 3000;  // all caps indicates an actual constant
 
-app.use(express.static('public')); // serve any assets by their path under 'public' directory
+app.use( express.static('public') ); // serve any assets by their path under 'public' directory
+app.use( bodyParser.json({ extended: true, type: '*/*' }) );
 
 app.get('/hello', (request, response) => { // the HTTP verb and path to respond to
   // this callback function is called when a request comes
@@ -31,6 +33,41 @@ app.get('/data', (req, resp) => {
   };
   resp.send(JSON.stringify(demo));
 });
+
+// for the fetch examples
+
+app.get('/byMethod', (req, resp) => {
+  const name = req.query.name;
+  const choice = req.query.choice;
+  // Above could have been: const { name, choice } = req.query;
+
+  if(name === 'error') {
+    resp.status(500).end();
+  } else {
+    resp.send( JSON.stringify({
+      sawMethod: 'GET',
+      sawName: name,
+      sawChoice: choice
+    }) );
+    // Above could have been: resp.json({...}); with appropriate object
+  }
+});
+
+app.post('/byMethod', (req, resp) => {
+  const name = req.body.name;
+  const choice = req.body.choice;
+  // Above could have been: const { name, choice } = req.body;
+  if(name === 'error') {
+    resp.status(500).end();
+  } else {
+    resp.json({
+      sawMethod: 'POST',
+      sawName: name,
+      sawChoice: choice
+    });
+  }
+});
+
 
 // notice the above commands simply store callbacks to run at the appropriate time, the callbacks have not actually run yet
 
