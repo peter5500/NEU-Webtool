@@ -1,0 +1,32 @@
+
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <title>GuessWord</title>
+    <link rel="stylesheet" href="design.css">
+  </head>
+  <body>
+    <nav><h1>Word Guessing Game</h1>
+    </nav>
+    <p class="title">Hello, let's guess the word!</p>
+    <div class="container">
+      <div class="guess-part"></div>
+        <input id="text" class="text" type="text" placeholder="Type your guess word...&#x23ce;"> 
+        <button id="button" class="button" type="submit" >Guess</button>
+        <div class="pre-guess">
+            <p>Guess history:</p>
+            <span id='guessHistory'></span>
+            <!-- <ul>
+                <li>No history</li>
+            </ul> -->
+        </div>
+        <div class="guess-turn">
+            <p>You already guessed <span id = "count-turn"></span> <span>turn.</span></p>
+        </div>
+      </div>
+    </div>
+    
+    <script src="wordList.js"></script>
+    <script src="guess.js"></script>
+  </body>
+  </html>

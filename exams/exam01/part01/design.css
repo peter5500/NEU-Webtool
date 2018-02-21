@@ -1,0 +1,56 @@
+body { 
+    background-color:rgb(50,50,50);
+    width:300px;
+    margin:0 auto;
+    display:block;
+    margin-top: 40px;
+    font-size: 20px;
+  }
+nav{
+    color: azure;
+    font-weight: bold;
+}
+.title{
+    padding-top: 20px;
+    color: rgb(81, 184, 248);
+    font-size: 27px;
+}
+
+.text{
+    outline: none;
+    padding: 10px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    margin-right: 5px;
+    border: 1px solid #aaa;
+    color: rgb(28, 4, 243);
+}
+
+.button{
+    border: none;
+    font-size: 14px;
+    padding: 10px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.pre-guess{
+    color: rgb(111, 200, 255);
+}
+.guess-turn{
+    color: rgb(243, 227, 9);
+}
+.output{
+    width:300px;
+    margin:0 auto;
+    display:block;
+    margin-top: 40px;
+    font-size: 20px;
+}
+
+button {
+    width: 30%;
+    height: 100%;
+}

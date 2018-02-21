@@ -137,3 +137,254 @@ dense brave awful meyer wagon knock peers quilt notre mambo
 flour choir blond burst wiley fibre daisy crude bored allah
 fares hoped safer marsh ricky theta stake arbor
 `.split(/ |\n/g).map( word => word.toUpperCase() ).filter( word => word );
+
+function compare(guess, word){
+    const tries = Array(26).fill(0);
+    const target = Array(26).fill(0);
+    var count = 0;
+    for( let i = 0; i < 5; i++ ){
+      tries[guess.charCodeAt(i) - 'A'.charCodeAt()] += 1;
+    }
+    for( let k = 0; k < 5; k++ ){
+      target[word.charCodeAt(k) - 'A'.charCodeAt()] += 1;
+    }
+    for( let j = 0; j < 26; j++ ){
+      if( tries[j] > 0 && target[j] > 0 ){
+        count += Math.min(tries[j], target[j]);
+      }
+    }
+    return count;
+  }
+
+  // const tasks = [  'No guesses made' ];
+
+  const wordInfo = {
+    allWords: mapAll(wordlist)
+  };
+    
+  const history = {
+      playerResult: [],
+      computerResult: [],
+      count: 0
+  };
+
+  let statusMessage = document.getElementsByClassName("status-message")[0];
+
+reset();
+function resetButton() {
+  document.getElementsByTagName("button")[0].disabled = true;
+  document.getElementsByTagName("button")[1].disabled = true;
+  document.getElementsByTagName("button")[0].hidden = false;
+  document.getElementsByTagName("button")[1].hidden = true;
+  document.getElementsByTagName("button")[2].hidden = true;
+}
+
+function reset() {
+  history.count = 0;
+  history.playerResult = [];
+  history.computerResult = [];
+  wordInfo.word1 = "";
+  wordInfo.word2 = "";
+  document.getElementById("player").innerHTML = "No guesses made";
+  document.getElementById("computer").innerHTML = "No guesses made";
+  resetButton();
+  addEventListener();
+  statusMessage.innerHTML = "Enter a common 5 letter word for them to guess";
+}
+
+function begin(event) {
+  event.target.hidden = true;
+  document.getElementsByTagName("button")[1].hidden = false;
+  wordInfo.word2 = document.getElementsByTagName("input")[0].value.toUpperCase();
+  document.getElementsByTagName("input")[0].value = "";
+  console.log(wordInfo.word2);
+  wordInfo.word1 = pickWord(wordlist);
+  console.log(wordInfo.word1);
+  statusMessage.innerHTML = "Enter a common 5 letter word to guess";
+}
+
+function computerTurn() {
+  computerResult = {};
+  computerResult.guess = pickWord(wordlist);
+  history.computerResult.push(computerResult);
+  computerResult.similarity = compare(computerResult.guess, wordInfo.word2);
+  document.getElementsByClassName("pre-guess")[0].innerHTML = history.computerResult[history.computerResult.length - 1].guess;
+  if (computerResult.guess === wordInfo.word2) {
+    event.target.hidden = true;
+    statusMessage.innerHTML = `Computer wins in ${history.count} turns`;
+    document.getElementsByTagName("button")[2].hidden = false;
+  }
+}
+
+function showGuessHistory() {
+  document.getElementById('player').innerHTML = '';
+  let word = "letters";
+  for (let pre in history.playerResult) {
+    if (history.playerResult[pre].similarity === 0 || history.playerResult[pre].similarity === 1) {
+      word = "letter";
+    }
+
+    let preWord = history.playerResult[pre].guess + ": " + history.playerResult[pre].similarity + " " + word + " in common";
+  
+    document.getElementById('player').innerHTML += "<li>" + preWord + "</li>";
+    word = "letters";
+  }
+
+  document.getElementById('computer').innerHTML = '';
+  word = "letters";
+  for (let pre in history.computerResult) {
+    if (history.computerResult[pre].similarity === 0 || history.computerResult[pre].similarity === 1) {
+      word = "letter";
+    }
+
+    let preWord = history.computerResult[pre].guess + ": " + history.computerResult[pre].similarity + " " + word + " in common.";
+  
+    document.getElementById('computer').innerHTML += "<li>" + preWord + "</li>";
+    word = "letters";
+  }
+}
+
+  function mapAll(wordlist) {
+    const set = new Set();
+    for (let word in wordlist) {
+      set.add(wordlist[word]);
+    }
+    return set;
+  }
+
+  function randomWord(list) {
+    return list[Math.floor(Math.random()*list.length)];
+  }
+  
+  function pickWord(wordlist) {
+    return randomWord(wordlist);
+  }
+    
+  document.getElementById("player-text")
+    .addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode == 13) {
+        document.getElementById("button").click();
+    }
+  }); 
+
+  function checkInput(event) {
+    history.count += 1;
+    let inputValue = document.getElementsByTagName("input")[0].value.toUpperCase();
+    document.getElementsByTagName("input")[0].value = "";
+    if (wordInfo.word1 === inputValue) {
+      event.target.hidden = true;
+      statusMessage.innerHTML = `Human wins in ${history.count} turns`;
+      document.getElementsByTagName("button")[2].hidden = false;
+    }
+  
+    computerTurn();
+    playerResult = {};
+    playerResult.guess = inputValue;
+    playerResult.similarity = compare(inputValue, wordInfo.word1);
+    history.playerResult.push(playerResult);
+    showGuessHistory();
+  }
+  
+  function guess(event) {
+    event.target.disabled = true;
+    checkInput(event);
+  }
+  
+
+  function check(event) {
+    let button;
+    if (document.getElementsByTagName("button")[0].hidden == false) {
+      button = document.getElementsByTagName("button")[0];
+    } else if (document.getElementsByTagName("button")[1].hidden == false) {
+      button = document.getElementsByTagName("button")[1];
+    } else {
+      return;
+    }
+  
+    if (event.target.value.length == 5) {
+      if (wordInfo.allWords.has(event.target.value.toUpperCase())) {
+        event.target.style.color = "green";
+        button.disabled = false;
+      } else {
+        event.target.style.color = "red";
+        if (button.innerHTML === "Begin") {
+          statusMessage.innerHTML = "Unknown word. Choose a different common 5 letter word for them to guess"; 
+        } else if ( button.innerHTML === "Guess") {
+          statusMessage.innerHTML = "Unknown word. Choose a different common 5 letter word to guess";
+        }
+      }
+    } else {
+      event.target.style.color = "black";
+      if (button.innerHTML === "Begin") {
+        statusMessage.innerHTML = "Enter a common 5 letter word for them to guess";
+      } else if ( button.innerHTML === "Guess") {
+        statusMessage.innerHTML = "Enter a common 5 letter word to guess";
+      }
+      button.disabled = true;
+    }
+  }
+  
+  function addEventListener() {
+    document.getElementsByTagName('button')[0].addEventListener("click", begin);
+    document.getElementsByTagName('button')[1].addEventListener("click", guess);
+    document.getElementsByTagName('button')[2].addEventListener("click", reset);
+    document.getElementsByTagName('input')[0].addEventListener("keyup", check);
+  }
+
+    // function render() {
+    //   document.querySelector('.player-guess ul').innerHTML = generateList();
+    // }
+  
+    // function generateList() {
+    //   showTurn();
+    //   const list = tasks.map( (element, index) => `<li data-item="${index}">${element}</li>` ).join('\n');
+    //   history.count += 1;
+    //   return list;
+    // }
+  
+    // function addToList(task) {
+    //   tasks.push(task);
+    //   render();
+    // }
+  
+    // function getNewTask() {
+    //   return document.querySelector('.player-text').value + ", " + " in common.";
+    // }
+  
+    // function addTask() {
+    //   addToList(getNewTask());
+    // }
+  
+    // function addAddListener() {
+    //   document.querySelector('.button').addEventListener('click', addTask);
+    // }
+    
+    // function showTurn() {
+    //   document.getElementById('count-turn').innerHTML = history.count;
+    // }
+    
+    // var statusOutput = document.getElementById('status_output');
+
+    // //check status
+    // function guessStatus(){
+    //   statusOutput.value = "Enter a common 5 letter word for them to guess"
+      
+    //   statusOutput.value = "Enter a common 5 letter word to guess"
+      
+    //   statusOutput.value = "Unknown word. Choose a different common 5 letter word for them to guess"
+      
+    //   statusOutput.value = "Unknown word. Choose a different common 5 letter word to guess"
+      
+    //   statusOutput.value = "Computer wins in" + history.count + "turns"
+      
+    //   statusOutput.value = "Human wins in" + history.count + "turns"
+    // }
+    
+    // start();
+    // addAddListener();
+    // render();
+
+    
+
+    
