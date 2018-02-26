@@ -1,0 +1,52 @@
+student: ChungChe Cheng
+repo: work-peter5500
+
+task: work/js-101
+code-runs: A
+code-works: A
+follows-directions: A
+pr-correct: A
+html-practices:
+css-practices:
+js-practices: A, -1
+task-grade: A-
+
+task: work/js-102
+code-runs: A
+code-works: A
+follows-directions: A
+pr-correct: A
+html-practices:
+css-practices:
+js-practices: A, -1
+task-grade: A-
+
+task: work/js-102-extra
+code-runs:
+code-works:
+follows-directions:
+pr-correct:
+html-practices:
+css-practices:
+js-practices:
+task-grade:
+
+task: exams/exam01/part01
+code-runs: A
+code-works: A, -1
+follows-directions: A, -1
+pre-correct: A
+html-practice: A
+css-practice: A
+js-practice: A, -1
+task-grade: B
+
+task: exams/exam01/part02
+code-runs: A
+code-works: B
+follows-directions: A, -1
+pre-correct: A
+html-practice: A
+css-practice: A
+js-practice: A, -1
+task-grade: B+
