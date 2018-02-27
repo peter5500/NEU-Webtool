@@ -1,0 +1,132 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+li {
+  list-style-type: none;
+}
+
+h1{
+  text-align: center;
+  color: wheat;
+  width: 100%;
+  padding: 6px;
+  background: rgb(26, 23, 23);
+  margin-bottom: 25px;
+}
+
+input {
+  width: 120px;
+  height: 30px;
+  font-size: 1.1em;
+  margin-left: 10px;
+}
+
+button {
+  font-family: "Source Sans Pro",Arial,Helvetica,sans-serif;
+  margin-top: 1%;
+  background-color: #ff7324;
+  border-color: #ff7324;
+  border-radius: 4px;
+  font-weight: bold;
+  text-align: center;
+  margin-left: 28%;
+  width: 120px;
+  height: 30px;
+  font-weight: bold;
+}
+
+button:disabled {
+  background-color: aliceblue;
+}
+
+.guess-result > div {
+  display: inline-block;
+  padding-left: 10px;
+}
+
+.input-area > div {
+  display: inline-block;
+  padding-left: 12%;
+}
+
+.guess-history {
+  padding-top: 3px;
+  margin-left: 40px;
+  border-radius: 4px;
+  height: 30px;
+  font-size: 20px;
+  color: wheat;
+}
+
+.name {
+  font-weight: bold;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  color: rgb(41, 240, 247);
+  margin-left: 25%;
+  text-align: center;
+}
+
+
+.container{
+  font-size: 20px;
+  margin: 0 auto 30px;
+  padding-left: 270px;
+  width: 80%;
+}
+
+.status {
+  background-color: yellow;
+  width: 520px;
+  margin-top: 20px;
+  margin-left: 9%;
+  padding: 2px 4px;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.player {
+  border-radius: 4px;
+  border: 2.5px solid rgb(26, 23, 23);
+  font-size: 0.95em;
+  height: 400px;
+  overflow-y: scroll;
+  margin-left: 15%;
+  max-height: 400px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  width: 280px;
+  color: wheat;
+  background:transparent;
+}

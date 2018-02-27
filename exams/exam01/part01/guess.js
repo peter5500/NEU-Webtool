@@ -1,75 +1,3 @@
-// ( () => {
-//     const tasks = [];
-  
-//     function render() {
-//       document.querySelector('.output ul').innerHTML = generateList();
-//     }
-  
-//     function generateList() {
-//       const list = tasks.map( (element, index) => `<li data-item="${index}">${element}` ).join('\n');
-//       return list;
-//     }
-// 
-//     function addToList(task) {
-//       tasks.push(task);
-//       render();
-//     }
-  
-//     function getNewTask() {
-//       return document.querySelector('.new-task').value;
-//     }
-  
-//     function addTask() {
-//       addToList(getNewTask());
-//     }
-  
-//     function addAddListener() {
-//       document.querySelector('.add').addEventListener('click', addTask);
-//     }
-    
-//     function toggleComplete(event) {
-//       event.target.classList.toggle('complete');
-//       console.log(event.target.dataset.item);
-//     }
-// const tasks = [  'Guessing...' ];
-  
-// function render() {
-//   document.querySelector('.pre-guess ul').innerHTML = generateList();
-// }
-
-// function generateList() {
-//   const list = tasks.map( (element, index) => `<li data-item="${index}">${element}</li>` ).join('\n');
-//   return list;
-// }
-
-// function addToList(task) {
-//   tasks.push(task);
-//   render();
-// }
-
-// function getNewTask() {
-//   return document.querySelector('.text').value ;
-// }
-
-// function addTask() {
-//   addToList(getNewTask());
-// }
-
-// function addAddListener() {
-//   document.querySelector('.button').addEventListener('click', addTask);
-// }
-    
-//     addAddListener();
-//     render();
-//   })();
-
-// var randomNumber = Math.floor(Math.random()*wordlist.length);
-
-// const wordInfo = {
-//     wordlist: wordlist()
-//   };
-
-//   wordInfo.word = pickWord(wordInfo.wordlist);
   
 const wordInfo = {
   allWords: wordlist
@@ -143,8 +71,8 @@ function compare(guess, word){
   const base = wordInfo.word;
   const tries = Array(26).fill(0);
   const target = Array(26).fill(0);
-  var count = 0;
-  var result = {};
+  let count = 0;
+  let result = {};
   result.won = false;
   for( let i = 0; i < base.length; i++ ){
     tries[guess.charCodeAt(i) - 'A'.charCodeAt()] += 1;
