@@ -29,6 +29,7 @@ class App extends Component {
     this.reset = this.reset.bind(this);
     this.begin = this.begin.bind(this);
     this.guess = this.guess.bind(this);
+    this.enterPress = this.enterPress.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
     this.updateWord = this.updateWord.bind(this);
     this.checkInputWord = this.checkInputWord.bind(this);
@@ -119,7 +120,7 @@ class App extends Component {
         }
       }
     } else {
-      event.target.style.color = 'black';
+      event.target.style.color = 'grey';
       if (this.state.buttonText[this.state.button] === 'Begin') {
         this.setState({
           statusMessage: 'Enter a common 5 letter word for them to guess'
@@ -132,6 +133,12 @@ class App extends Component {
       this.setState({
         disabled: true
       });
+    }
+  }
+
+  enterPress(event){
+    if (event.key === "Enter"){
+      this.props.guess();
     }
   }
 
@@ -159,9 +166,12 @@ class App extends Component {
         clearInputValue={this.clearInputValue}
         inputValue={this.state.inputValue}
         onUpdateWord={this.updateWord}
+        onKeyPress={this.enterPress}
       />
     );
   }
+
+  
 }
 
 export default App;

@@ -15,6 +15,7 @@ const GBody = ({
   history,
   wordInfo,
   onClick,
+  onKeyPress,
 }) => {
   const commonLetter = (guess, word) => {
     const tries = Array(26).fill(0);
