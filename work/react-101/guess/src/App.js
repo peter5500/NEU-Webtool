@@ -71,7 +71,8 @@ class App extends Component {
     history.result2.push(pickWord(wordInfo.wordlist).toUpperCase());
     if (history.result2[history.result2.length - 1] === wordInfo.word2) {
       this.setState({
-        statusMessage: `Computer wins in ${history.count} turns..`
+        statusMessage: `Computer wins in ${history.count} turns..`,
+        button: 2
       });
     }
   }
