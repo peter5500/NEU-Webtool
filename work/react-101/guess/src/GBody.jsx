@@ -11,11 +11,10 @@ const GBody = ({
   clearInputValue,
   onUpdateWord,
   disabled,
-  preGuess,
   history,
   wordInfo,
   onClick,
-  onKeyPress,
+  enterPress,
 }) => {
   const commonLetter = (guess, word) => {
     const tries = Array(26).fill(0);
@@ -48,18 +47,8 @@ const GBody = ({
             <div className="name">Player guess history</div>
             <div className="player">
               <HistoryResult
-                result={history.result1}
+                result={history.result}
                 guess={wordInfo.word1}
-                commonLetter={commonLetter}
-              />
-            </div>
-          </div>
-          <div>
-            <div className="name">Robot guess history</div>
-            <div className="player">
-              <HistoryResult
-                result={history.result2}
-                guess={wordInfo.word2}
                 commonLetter={commonLetter}
               />
             </div>
@@ -76,7 +65,6 @@ const GBody = ({
               onChange={updateWord}
             />
           </div>
-          <div className="guess-history">Bot guess: {preGuess}</div>
         </div>
 
         <div className="status">Hint: {statusMessage}</div>
@@ -86,6 +74,7 @@ const GBody = ({
             onClick={onClick}
             text={buttonText}
             disabled={disabled}
+            onKeyPress={enterPress}
             input={() => this.input(this.input)}
           />
         </div>
