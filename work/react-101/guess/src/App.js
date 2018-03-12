@@ -67,18 +67,20 @@ class App extends Component {
     if (wordInfo.word1 === inputValue) {
       this.setState({
         statusMessage: `Congrats, You win in ${history.count} turns!`,
-        button: 1
+        button: 1,
+        disabled: false,
       });
-    }
-
+      return;
+    }     
+    this.setState({
+      disabled: true,
+    });
     history.result.push(inputValue);
   }
 
   guess(event) {
     this.checkInputWord(event);
-    this.setState({
-      disabled: true,
-    });
+    
   }
 
   handleKeyUp(event) {
