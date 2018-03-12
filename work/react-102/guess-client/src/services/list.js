@@ -22,6 +22,6 @@ export const guess = (id, playerGuess, computerGuess) => {
       computerGuess: computerGuess,
     } )
   })
-  .then( response => response.ok ? response.json() : Promise.reject(response.text()) )
-  .catch( () => Promise.reject('update-fail') );
+  .then( response => response.ok ? response.json() : Promise.reject(response.statusText ))
+  .catch( (error) => Promise.reject(error) );
 };

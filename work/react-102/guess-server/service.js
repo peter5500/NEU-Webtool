@@ -42,9 +42,11 @@ app.post('/guess', (req, res) => {
     const result = {};
 
     if (playerGuess.length !== 5){
+        res.statusMessage = "Invalid length!"
         res.status(400).end();
     }
     if (!wordSelect.map.has(id)){
+        res.statusMessage = "Id is not found"
         res.status(400).end();
     }
 
@@ -57,10 +59,10 @@ app.post('/guess', (req, res) => {
     }
 
     if (computerGuess === wordSelect.map.get(id).computer) {
-        result.win1 = true;
+        result.win2 = true;
         result.commonLetter2 = 5;
     } else {
-        result.win1 = false;
+        result.win2 = false;
         result.commonLetter2 = commonLetter(wordSelect.map.get(id).computer, computerGuess);
     }
     res.send(JSON.stringify(result));

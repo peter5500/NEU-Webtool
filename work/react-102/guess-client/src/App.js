@@ -24,7 +24,8 @@ class App extends Component {
       button: 0,
       buttonText: ['Begin', 'Guess', 'Reset'],
       statusMessage: 'Enter a common 5 letter word for them to guess',
-      inputValue: ''
+      inputValue: '',
+      error: '',
     };
 
     this.reset = this.reset.bind(this);
@@ -96,12 +97,12 @@ class App extends Component {
       button: 1,
       inputValue: '',
       statusMessage: 'Enter a common 5 letter word to guess',
-      disabled: true
+      disabled: true,
     });
   }
 
   checkInputWord(event) {
-    history++;
+    history.count++;
     let inputValue = this.state.inputValue.toUpperCase();
     this.setState({
       inputValue: ''
@@ -128,16 +129,18 @@ class App extends Component {
         inputDisabled:true,
         won: true,
       });
-    }
+    } 
       history.commonLetter1.push(data.commonLetter1);
       history.commonLetter2.push(data.commonLetter2);
       this.setState({});
   }
 
   handleGuess(playerGuess, computerGuess){
-    guess(this.setState.id, playerGuess, computerGuess)
+    guess(this.state.id, playerGuess, computerGuess)
     .then(data => this.checkWin(data))
-    .catch(e => console.log(e));
+    .catch(error => this.setState({
+      error: error,
+    }));
   }
 
   guess(event) {
@@ -190,7 +193,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.wordInfo);
     let buttonText = this.state.buttonText[this.state.button];
     let onClick;
     if (this.state.button === 0) {
@@ -216,6 +218,7 @@ class App extends Component {
         onUpdateWord={this.updateWord}
         inputDisabled={this.state.inputDisabled}
         onKeyPress={this.enterPress}
+        error={this.state.error}
       />
     );
   }

@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import { getList, select, guess } from "./services/list";
 
 const HistoryResult = ({ result, guess, commonLetter }) => {
   if (result.length === 0) {

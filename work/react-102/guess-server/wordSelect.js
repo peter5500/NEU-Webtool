@@ -9,6 +9,7 @@ const wordlist = require("./wordlist");
         player: this.wordlist[Math.floor(Math.random() * this.wordlist.length)],
         computer: playerPick,
       };
+      console.log(botPick.player);
       this.map.set(this.id, botPick);
       this.id += 1;
     }

@@ -16,6 +16,7 @@ const GBody = ({
   wordInfo,
   onClick,
   onKeyPress,
+  error,
 }) => {
     const updateWord = event => {
     onUpdateWord(event.target.value); 
@@ -24,6 +25,7 @@ const GBody = ({
   return (
     <div>
       <h1>Welcome to word guess game</h1>
+      <h1>{error}</h1>
     <div className="container">
         <div className="guess-result">
           <div>
