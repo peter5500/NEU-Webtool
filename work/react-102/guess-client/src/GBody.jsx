@@ -23,10 +23,10 @@ const GBody = ({
   };
 
   return (
-    <div>
+    <div className="body">
       <h1>Welcome to word guess game</h1>
-      <h1>{error}</h1>
-    <div className="container">
+      <h4 className="error">error message: {error}</h4>
+    <div>
         <div className="guess-result">
           <div>
             <div className="name">Player guess history</div>

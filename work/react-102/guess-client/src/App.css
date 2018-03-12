@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: blue;
 }
 
 .App-logo {
@@ -22,7 +23,108 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.body{
+  background-color: rgb(104, 100, 96);
+}
+
+li {
+  list-style-type: none;
+}
+
+h1{
+  text-align: center;
+  color: wheat;
+  width: 100%;
+  padding: 6px;
+  background: rgb(26, 23, 23);
+  margin-bottom: 25px;
+}
+
+input {
+  width: 120px;
+  height: 30px;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 5%;
+  margin-left: 178%;
+}
+
+button {
+  font-family: "Source Sans Pro",Arial,Helvetica,sans-serif;
+  margin-top: 1%;
+  background-color: #ff7324;
+  border-color: #ff7324;
+  border-radius: 4px;
+  font-weight: bold;
+  text-align: center;
+  margin-left: 46%;
+  width: 120px;
+  height: 30px;
+  font-weight: bold;
+  
+}
+
+button:disabled {
+  background-color: aliceblue;
+}
+
+.guess-result > div {
+  display: inline-block;
+  margin-left: 18%;
+}
+
+.input-area > div {
+  display: inline-block;
+  padding-left: 12%;
+}
+
+.guess-history {
+  padding-top: 3px;
+  margin-left: 28.5%;
+  border-radius: 4px;
+  height: 30px;
+  font-size: 20px;
+  color: wheat;
+}
+
+h4{
+  text-align: center;
+  color: rgb(235, 124, 20)
+}
+
+.name {
+  font-weight: bold;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  color: rgb(41, 240, 247);
+  margin-left: 30%;
+  text-align: center;
+}
+
+
+.status {
+  background-color: yellow;
+  width: 520px;
+  margin-top: 20px;
+  padding: 2px 4px;
+  font-weight: bold;
+  border-radius: 4px;
+  margin-left: 33%;
+  text-align: center;
+}
+
+.player {
+  border-radius: 4px;
+  border: 2.5px solid rgb(26, 23, 23);
+  font-size: 0.95em;
+  height: 400px;
+  overflow-y: scroll;
+  margin-left: 15%;
+  max-height: 400px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  width: 280px;
+  color: wheat;
+  background:transparent;
 }
