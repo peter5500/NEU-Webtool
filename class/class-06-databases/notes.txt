@@ -1,0 +1,89 @@
+IF YOU ARE NOT COMPLETING ASSIGNMENTS
+AND NOT YET TALKING WITH ME
+YOU SHOULD REACH OUT TO ME ASAP
+
+Multiple clients -> uniq, collision
+
+async once, async thereafter
+await/async
+
+Authentication.  (who you are)
+Authorization.   (what you're allowed to do)
+
+Multi-factor auth.
+-Know
+-Have
+-Be
+
+database - it's where you store information
+- get it back (save)
+- find (searching)
+- restrict
+- avoid collisions
+ACID
+
+-SQL (Structured Query Language)
+Table-based relational
+
+Student info (studentID 1, Name: Amit )
+Classes (classID: 32, code: CATS6250 )
+Enrollment (Class: 32, student: 1 )
+
+SELECT NAME from STUDENT_INFO WHERE STUDENT_ID = ' + userId + '..SELECT studentId from enrollment where classID = ( select ClassId from classes where code == 'CAT6250'))
+
+NAME CODE 
+
+
+SQL NoSQL 
+
+Relational (spreadsheet)
+Oracle SQLServer
+PostgresQL MySQL
+SQLite (no server program, just a client program.  Uses filesystem permissions)
+
+document-based database
+often JSON-like API, often not-ACID
+faster, less reliable.  Debate about what's worthwhile on both sides.
+
+
+MongoDB CouchDB 
+
+connect db
+(auth)
+here's what I want
+(wait)
+get it
+
+
+SQL Injection - NEVER trust front end, ALWAYS bind or otherwise protect your SQL statements - best to use solution provided by DB authors, or your ORM if one is involved.  (ORM - Libraries that try to help define the DB interactions to be more like object manipulation than like data inspection.)
+
+const result = fetch(...).then( ... )
+
+async await
+
+function retrieve () { 
+  //...
+  return  new Promise( (..) );
+}
+
+bar();
+retrieve().then(CallbackB).then(CallbackC).catch();
+foo(); // runs before callbacks
+
+--
+async function retrieve() {
+  return new Promise();
+}
+
+bar();
+try {
+  await jane = retrieve();
+  await jane = callbackB(jane);
+  await jane = callbackC(jane);
+  foo();
+} catch (e) { 
+}
+
+
+
+
