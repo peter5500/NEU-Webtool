@@ -14,7 +14,7 @@ This includes redux, react-router, Bootstrap, and other libraries.
 
 ### Due
 
-The pull request and matching branch should be in github before the start of class on Mon Feb 26
+The pull request and matching branch should be in github before the start of class on Mon Mar 26
 
 ### Format
 
