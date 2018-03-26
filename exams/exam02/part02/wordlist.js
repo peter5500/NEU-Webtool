@@ -137,4 +137,5 @@ dense brave awful meyer wagon knock peers quilt notre mambo
 flour choir blond burst wiley fibre daisy crude bored allah
 fares hoped safer marsh ricky theta stake arbor
 `.split(/ |\n/g).map( word => word.toUpperCase() ).filter( word => word );
+
 module.exports = wordlist;
