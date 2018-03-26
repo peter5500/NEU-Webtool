@@ -44,7 +44,7 @@ And since all JavaScript objects inherit methods from a prototype, so if we can'
 
 ### Answer: 
 
-1.CORS is a mechanism that uses additional HTTP headers to let a user gain permission to access selected resources from a server on a different origin. Often used when requests a resource from a different domain, protocol, or port than the one from which the current document originated. The CORS requires the client-side code, the browser, and the server to work together. The client-side code has to explicitly initiate a Cross-Origin request and the browser has to ask the server if it is allowed. So CORS has to do with the browsers.
+1.CORS is a mechanism that uses additional HTTP headers to let a user gain permission to access selected resources from a server on a different origin. Often used when requests a resource from a different domain, protocol, or port than the one from which the current document originated. The CORS requires the client-side code, the browser, and the server to work together. Since the client-side code has to explicitly initiate a Cross-Origin request and the browser has to ask the server if it is permitted. So CORS has to do with the browsers.
 
 2.Since SOP only has the access to its origin, by using CORS can provide cross-origin access.
 

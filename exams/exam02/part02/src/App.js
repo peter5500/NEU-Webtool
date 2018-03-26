@@ -24,6 +24,7 @@ class App extends Component {
       barbaraCommon: {},
     }
 
+    this.enterPress = this.enterPress.bind(this);
     this.startListener = this.startListener.bind(this);
     this.handleStart = this.handleStart.bind(this);
     this.handleAlfredGuess = this.handleAlfredGuess.bind(this);
@@ -145,6 +146,11 @@ class App extends Component {
     }
   }
 
+  enterPress(event){
+    if (event.key === "Enter"){
+      this.props.startListener();
+    }
+  }
 
   newGame(event) {
     history.result1 = [];
@@ -174,7 +180,8 @@ class App extends Component {
         secret1 = {this.state.secret1}
         secret2 = {this.state.secret2}
         disabled = {this.state.disabled}
-        onClick={onClick}
+        onClick = {onClick}
+        onKeyPress = {this.enterPress}
         statusMessage = {this.state.statusMessage}
       />
     );

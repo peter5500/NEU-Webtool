@@ -11,7 +11,7 @@ const ResultHistory = ({ result, commonLetter }) => {
   const resultList = result.map((value, index) => {
     return (
       <li key={index}>
-        {value}: {commonLetter[index]} in common..
+        {value} : {commonLetter[index]} in common ;
       </li>
     );
   });

@@ -47,7 +47,7 @@ app.delete("/game/:id", (req, res) => {
   wordSelect.count = 0;
 });
 
-app.listen(PORT, () => {  // this will start the server waiting for incoming requests
+app.listen(PORT, () => {  
   console.log(`Server listening at http://localhost:${PORT}`);
   console.log('use Ctrl-C to stop this server');
 });
