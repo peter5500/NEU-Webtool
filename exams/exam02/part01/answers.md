@@ -29,9 +29,9 @@ const data = fetch('example.com/test')
 
 ### Answer: 
  
-1.Normally speaking, the variable that declared globally has a global scope (which means that it is declared outside a function), it can be used anywhere. And the variable that declared in a function, has a local scope. Since the local scope variable can only be accessed and recognized within the function, it can only be called inside the function which declared it, and the same name can be used in different fucntion cause it won't influnce other.
+1. Normally speaking, the variable that declared globally has a global scope (which means that it is declared outside a function), it can be used anywhere. And the variable that declared in a function, has a local scope. Since the local scope variable can only be accessed and recognized within the function, it can only be called inside the function which declared it, and the same name can be used in different fucntion cause it won't influnce other.
 
-2.The closure is the function inside another function, and have access to the variables in the outer function. It usually used to control side effects or create private variables.
+2. The closure is the function inside another function, and have access to the variables in the outer function. It usually used to control side effects or create private variables.
 
 
 ## Question: What is a polyfill, and how would a polyfill for a new Array function relate to the concept of prototypes? 
@@ -46,9 +46,9 @@ And since all JavaScript objects inherit methods from a prototype, so if we can'
 
 ### Answer: 
 
-1.CORS is a mechanism that uses additional HTTP headers to let a user gain permission to access selected resources from a server on a different origin. Often used when requests a resource from a different domain, protocol, or port than the one from which the current document originated. The CORS requires the client-side code, the browser, and the server to work together. Since the client-side code has to explicitly initiate a Cross-Origin request and the browser has to ask the server if it is permitted. So CORS has to do with the browsers.
+1. CORS is a mechanism that uses additional HTTP headers to let a user gain permission to access selected resources from a server on a different origin. Often used when requests a resource from a different domain, protocol, or port than the one from which the current document originated. The CORS requires the client-side code, the browser, and the server to work together. Since the client-side code has to explicitly initiate a Cross-Origin request and the browser has to ask the server if it is permitted. So CORS has to do with the browsers.
 
-2.Since SOP only has the access to its origin, by using CORS can provide cross-origin access.
+2. Since SOP only has the access to its origin, by using CORS can provide cross-origin access.
 
 
 
