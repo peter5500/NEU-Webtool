@@ -13,13 +13,13 @@ console.log(data.cats);
 ```
 ### Answer:
  
-Since the code will be asynchronous, the console.log will come out faster than the return data, thus the print out result will be undefined. We can solve the problem by putting the console.log in the same bracket with return data as follow, and the code will work as intended.
+Since the fetch method always return a promise(a type of data) rather than an object, the "data.cats" will be undefined. We can solve the problem by using the changed console.log to replace "return data" as follow to obtain the data, and the code will work as intended.
 
 ```
 const data = fetch('example.com/test')
 .then( response => response.json() )
 .then( json => { 
-  console.log(data.cats);
+  console.log(json.cats);
 });
 ```
 
