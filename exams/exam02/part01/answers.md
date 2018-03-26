@@ -19,7 +19,6 @@ Since the code will be asynchronous, the console.log will come out faster than t
 const data = fetch('example.com/test')
 .then( response => response.json() )
 .then( json => { 
-  return data;
   console.log(data.cats);
 });
 ```
