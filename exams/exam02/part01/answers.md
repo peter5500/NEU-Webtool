@@ -15,12 +15,14 @@ console.log(data.cats);
  
 Since the code will be asynchronous, the console.log will come out faster than the return data, thus the print out result will be undefined. We can solve the problem by putting the console.log in the same bracket with return data as follow, and the code will work as intended.
 
+```
 const data = fetch('example.com/test')
 .then( response => response.json() )
 .then( json => { 
   return data;
   console.log(data.cats);
 });
+```
 
 
 ## Question: What is the scope of a variable in JS?  How does it relate to closures? 
