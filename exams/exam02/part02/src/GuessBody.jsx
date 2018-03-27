@@ -40,7 +40,7 @@ const GuessBody = ({
           </div>
         </div>
         <div className="status">{statusMessage}</div>
-        <div className="button-style">
+        <div className="button">
           <GuessButton
             onClick = {onClick}
             text = {btnText}

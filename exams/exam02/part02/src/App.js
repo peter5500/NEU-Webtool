@@ -43,27 +43,29 @@ class App extends Component {
     })
       await this.handleStart();
       console.log(this.state.secret1 + "/" + this.state.secret2);
+
     while (true) {
       history.count += 1;
       await this.handleAlfredGuess();
-      if (this.state.won) {
+      if (this.state.win) {
         this.setState({
           winner: "Alfred"
         });
         break;
       }
       await this.handleBarbaraGuess();
-      if (this.state.won) {
+      if (this.state.win) {
         this.setState({
           winner: "Barbara"
         });
         break;
       }
     }
+
     this.handleDelete();
     this.setState({
       btnText: "New game",
-      statusMessage: this.state.winner + " wins in " + history.count + " turns!" ,
+      statusMessage: this.state.winner + " wins in " + history.count + " turns" ,
       disabled: false,
     })
   }
@@ -72,12 +74,12 @@ class App extends Component {
     try {
       await start(config.alfred)
       .then(data => this.setState({
-        id1: data.id,
+        idAlfred: data.id,
         secret1: data.secret,
       }));
       await start(config.barbara)
       .then(data => this.setState({
-        id2: data.id,
+        idBarbara: data.id,
         secret2: data.secret,
       }));
     } catch(error) {
@@ -87,7 +89,7 @@ class App extends Component {
 
   async handleAlfredGuess(){
     try {
-      await getGuess(config.alfred, this.state.id1, {})
+      await getGuess(config.alfred, this.state.idAlfred, {})
       .then(data => this.getAlfredCommon(data));
     } catch (error) {
       console.log(error);
@@ -96,7 +98,7 @@ class App extends Component {
 
   async getAlfredCommon(data) {
     try {
-      await getCommon(config.barbara, this.state.id2, data.guess)
+      await getCommon(config.barbara, this.state.idBarbara, data.guess)
       .then(backData => this.updateAlfredHistory(backData, data.guess));
     } catch (error) {
       console.log(error);
@@ -107,13 +109,13 @@ class App extends Component {
     history.result1.push(guess);
     history.commonLetter1.push(backData.matched);
     this.setState({
-        won: backData.hasWon,
+        win: backData.hasWon,
       });
   }
 
   async handleBarbaraGuess(){
     try {
-      await getGuess(config.barbara, this.state.id2, {})
+      await getGuess(config.barbara, this.state.idBarbara, {})
       .then(data => this.getBarbaraCommon(data));
     } catch (error) {
       console.log(error);
@@ -122,7 +124,7 @@ class App extends Component {
 
   async getBarbaraCommon(data) {
     try {
-      await getCommon(config.alfred, this.state.id1, data.guess)
+      await getCommon(config.alfred, this.state.idAlfred, data.guess)
       .then(backData => this.updateBarbaraHistory(backData, data.guess));
     } catch (error) {
       console.log(error);
@@ -133,14 +135,14 @@ class App extends Component {
     history.result2.push(guess);
     history.commonLetter2.push(backData.matched);
     this.setState({
-        won: backData.hasWon,
+        win: backData.hasWon,
       });
   }
 
   async handleDelete() {
     try {
-      await reset(config.alfred, this.state.id1);
-      await reset(config.barbara, this.state.id2);
+      await reset(config.alfred, this.state.idAlfred);
+      await reset(config.barbara, this.state.idBarbara);
     } catch (error) {
       console.log(error);
     }
