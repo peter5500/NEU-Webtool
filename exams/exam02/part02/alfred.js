@@ -21,7 +21,7 @@ app.post("/game", (req, res) => {
     secret: wordSelect.selectMap.get(wordSelect.id - 1), 
   };
   res.send(JSON.stringify(
-    result,
+    result
   ));
 });
 
