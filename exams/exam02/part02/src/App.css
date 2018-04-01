@@ -1,0 +1,181 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.App {
+  text-align: center;
+  background-color: blue;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+body{
+  background-color: rgb(104, 100, 96);
+}
+
+li {
+  list-style-type: none;
+}
+
+h1{
+  text-align: center;
+  color: wheat;
+  width: 100%;
+  padding: 6px;font-size: 40px;  
+  background: rgb(26, 23, 23);
+  margin-bottom: 25px;
+}
+
+input {
+  width: 120px;
+  height: 30px;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 5%;
+  margin-left: 178%;
+}
+
+button {
+  font-family: "Source Sans Pro",Arial,Helvetica,sans-serif;
+  margin-top: 1%;
+  margin-bottom: 2%;
+  font-size: 20px;
+  background-color: #ff7324;
+  border-color: #ff7324;
+  border-radius: 4px;
+  font-weight: bold;
+  text-align: center;
+  margin-left: 46%;
+  width: 120px;
+  height: 30px;
+  font-weight: bold;
+  position: absolute;
+  height: 40px;
+  width: 150px;
+  color:rgb(252, 234, 200);
+}
+
+button:disabled {
+  background-color: rgb(224, 224, 224);
+}
+
+.guess-result{
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.guess-result > div {
+  display: inline-block;
+  margin-left: 20%;
+  text-align: center;
+}
+
+.parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-area > div {
+  display: inline-block;
+  padding-left: 12%;
+}
+
+.name {
+  font-weight: bold;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  color: rgb(41, 240, 247);
+  margin-left: 30%;
+  text-align: center;
+}
+
+.status {
+  color: rgb(0, 225, 255);
+  font-size: 27px;
+  margin-top: 70px;
+  font-weight: bold;
+  text-align: center;
+  animation: blinker 1.3s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+.target-word {
+  color: rgb(255, 230, 0);
+  font-weight: bold;
+  font-size: 22px;
+  margin-top: 20px;
+}
+
+.result{
+  color: rgb(255, 255, 255);
+  font-size: 25px;
+  padding-top: 15px;
+}
+
+.player {
+  border-radius: 8px;
+  border: 2.5px solid rgb(68, 68, 68);
+  font-size: 25px;
+  height: 480px;
+  overflow-y: auto;
+  max-height: 500px;
+  padding-left: 15px;
+  padding-top: 8px;
+  padding-right: 10px;
+  padding-top: 10px;
+  width: 310px;
+  color: wheat;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  background:rgb(68, 68, 68);
+}
